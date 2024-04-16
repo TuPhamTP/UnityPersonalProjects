@@ -31,7 +31,6 @@ public class GoogleSheetAPI : MonoBehaviour
 
     public string spreadsheetId = "1KvE-eyOXRtwzMFJF5ipbKHQGVyMap2wplwm6OZHQM4c"; // ID của Google Sheet
     public string range = "Sheet1!A2:C4"; // Range chứa dữ liệu, ví dụ: "Sheet1!A1:C3"
-    //string jsonFilePath = Path.Combine(Application.streamingAssetsPath, "test1project-420406-bb9a626f6d58.json");
     private GoogleCredentialInfo credentialInfo;
 
     private void Start()
@@ -43,14 +42,6 @@ public class GoogleSheetAPI : MonoBehaviour
 
     private void ReadDataFromGoogleSheet()
     {
-        /*
-        GoogleCredential credential;
-        using (var stream = new System.IO.FileStream(jsonFilePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
-        {
-            credential = GoogleCredential.FromStream(stream)
-                .CreateScoped(new[] { SheetsService.Scope.Spreadsheets });
-        }
-        */
         GoogleCredential credential = GoogleCredential.FromJson(JsonConvert.SerializeObject(credentialInfo))
             .CreateScoped(new[] { SheetsService.Scope.Spreadsheets });
 
@@ -88,14 +79,6 @@ public class GoogleSheetAPI : MonoBehaviour
 
     public void WriteDataToGoogleSheet()
     {
-        /*
-        GoogleCredential credential;
-        using (var stream = new System.IO.FileStream(jsonFilePath, System.IO.FileMode.Open, System.IO.FileAccess.Read))
-        {
-            credential = GoogleCredential.FromStream(stream)
-                .CreateScoped(new[] { SheetsService.Scope.Spreadsheets });
-        }
-        */
         GoogleCredential credential = GoogleCredential.FromJson(JsonConvert.SerializeObject(credentialInfo))
             .CreateScoped(new[] { SheetsService.Scope.Spreadsheets });
 
