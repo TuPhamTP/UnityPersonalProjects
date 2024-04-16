@@ -317,6 +317,7 @@ RectTransform:
   m_Children:
   - {fileID: 1017150892}
   - {fileID: 1936569681}
+  - {fileID: 1226447400}
   m_Father: {fileID: 867754216}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -718,6 +719,94 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1086318960}
   m_CullTransparentMesh: 1
+--- !u!1 &1226447399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226447400}
+  - component: {fileID: 1226447402}
+  - component: {fileID: 1226447401}
+  m_Layer: 5
+  m_Name: Text JSON
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1226447400
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226447399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 855704205}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.24300002}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -1.4835205}
+  m_SizeDelta: {x: 0, y: 2.9670105}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1226447401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226447399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "{\r\n  \"type\": \"service_account\",\r\n  \"project_id\": \"test1project-420406\",\r\n 
+    \"private_key_id\": \"bb9a626f6d58627cdd08735839103fd7778c76a5\",\r\n  \"private_key\":
+    \"-----BEGIN PRIVATE KEY-----\\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCXo2/3gQMO4xAo\\no5tzzbbs+cjpRFJRG6aXmGaf+G8JSNBCLfDKYWR/1+m9HEIDGcyXPi1TmjIA9u+9\\n/G9coWlFVmv3bhjkYX+u737ResEisyOUmAnHp/QRpCA/4fpuxpxFqolzpmcLEOcX\\nMITv4H2abzMaQhoBr3eMBkwRv+cNUvbNkxNpnBBkfzbW32WVLPYDs6bqMdAZTVn8\\nJwZctlWca9URtFy6W0b/eNb12NkyacANlavriTfeuwaK3yuWTcYBBPyHdA6to638\\nIjAVkJiocgh0WHvG2cTc74EuxTyxX3fGap+uZUCEsrb86LEkmJTtWJzMVeIRjvTY\\nXbKlWqEHAgMBAAECggEAJO2QXt30OLPjQ4JUYSc/3QYXf3c79LSfJVvf4iVGJSSu\\nUu+NLDv7lYanTX6MNOUbhdmGgE2Uz9dTGxlWpWBJmrEpKeCN/1AfICMC51DVp/Wo\\nPI+qEg08yu8FS4lky4VimTSmtJtZjMBZBrSyKxiofeuGrmZanv50Ro1iCRCK3Btw\\nOE5Mzrqqjk1kfTl9VQUypM84/oK4gCM2AW5G8IIV/bWI1COT6YT0Qk2Lt+GcTmYf\\n52q95BU6SaC7Fgn0w1ZF9PYRQGoRJBlUu/aZJ8bfAbAmGE1r+n/Vgmac5VMDyAuP\\nzqt8E+9dq8Voq+9LtLFzukp9DrK03vpc/6HKlefeAQKBgQDFskuTfOp96w3fsFVc\\nSl/rqhlkbT0jz+thwQfx5CmQIvoIg4VtQUDHFID/I088h4+7Gy27AzS2ySmW57HX\\nqrHRXhwqiE9Vp2Lkl9d7jIprkuOnc7JSHxxEUSST+wHSu8mGfgB67Hiy0Y3qqr3F\\no50zS69HLs2l+4z1xMuRUpCD4QKBgQDEW9kwq4PejZcFn/aN//MHXc6mW6k8eS/T\\ndOzmjTFuWQ0XNhWnyc2r0MMBsj5ZTH8yBuUY1YuUeqLwv3SAPASELOsHyZSX8nO3\\neGJ9o9e+VZoPQUQvblHXQUztRHJMI8qvSklgsVC/DY99YdLE8ZCcmVlmqbn3R2xw\\nWgnRYmfB5wKBgQCVChA91Vt2qEDiVS5VEGD16luQQWZpXDNIk9yoeGj5F9VFm9l3\\n/0yViRiiv/zZVh1+YkP8i7Mu5cKr2GpTe4TooTk8u1yL50//o5U4uEAWTzu/HtLd\\nZETMIBwiT4YVV6ra8JzuDt4DeUWzFxtQJ0O4yyMN1/QDYPvowH7zRLpcIQKBgDpQ\\naKz6ktwaQpqKCgfb1kn+wutG13i9KMXsuJoznlV+HtQg3MeKuAjpo7AyRi/w9uld\\ngNYiPSSoUxGaWjfnGxRB3r7eT8HcYB9BokZbzSuacnlLUbugUK/Tlcv1Ati33G64\\nahhMMIW8ujtrPNP+RYssQ4+oojDcxkiLhNTpG5VLAoGAWbv9dnn3+F9ajJFm4lx5\\nX/uMQ+yGeBpK54je2T3GhIxhVMBTsVhID6YAu/2/7BYJXeG09XJ0t8o8QmHbRHkv\\nE3ri9WusiUXJ2GVPcoBAcnkelsQn3K6oUTYW3GS7FYwjTbJ9M0HTcu2xUUXEf51k\\neeF5aLxfu4GnvmqO+U6S4p8=\\n-----END
+    PRIVATE KEY-----\\n\",\r\n  \"client_email\": \"unity-google-sheets-a@test1project-420406.iam.gserviceaccount.com\",\r\n 
+    \"client_id\": \"103974201524099151746\",\r\n  \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\r\n 
+    \"token_uri\": \"https://oauth2.googleapis.com/token\",\r\n  \"auth_provider_x509_cert_url\":
+    \"https://www.googleapis.com/oauth2/v1/certs\",\r\n  \"client_x509_cert_url\":
+    \"https://www.googleapis.com/robot/v1/metadata/x509/unity-google-sheets-a%40test1project-420406.iam.gserviceaccount.com\",\r\n 
+    \"universe_domain\": \"googleapis.com\"\r\n}\r\n"
+--- !u!222 &1226447402
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226447399}
+  m_CullTransparentMesh: 1
 --- !u!1 &1837479204
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextDebug: {fileID: 1017150890}
+  TextJsonSample: {fileID: 1226447401}
   spreadsheetId: 1KvE-eyOXRtwzMFJF5ipbKHQGVyMap2wplwm6OZHQM4c
   range: Sheet1!A2:C4
 --- !u!4 &1837479206
