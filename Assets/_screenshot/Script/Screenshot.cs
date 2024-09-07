@@ -14,7 +14,7 @@ public class Screenshot : MonoBehaviour
 
     private void Start()
     {
-        if (Application.platform == RuntimePlatform.WebGLPlayer) UnityEngine.WebGLInput.captureAllKeyboardInput = false;
+        if (Application.platform == RuntimePlatform.WebGLPlayer) UnityEngine.WebGLInput.captureAllKeyboardInput = true;
     }
 
     public void CaptureScreenshot()
