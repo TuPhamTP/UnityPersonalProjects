@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">      <!-- custom input -->
+    <title>Zombie Incursion | Powered by Octokit</title>
+    <style>
+        html{
+           height: 100%;
+       }
+       body{
+           height:100%;
+           display: flex;
+           margin: 0;
+           justify-content: center;
+           align-items: center;
+           overflow: hidden;
+
+       }
+
+        #progress {
+           text-align: bottom;
+           position: absolute;
+           width: 50%;
+           top: 50%;
+           left: 0;
+           right: 0;
+           margin: auto;
+           transform: translateY(-50%);
+           border: 1px solid white;
+       }
+       
+       #progress #full {
+           margin: 2px;
+           background: white;
+           height: 0.5em;
+           transform-origin: top left;
+       }
+       
+       #loader {
+           position: absolute;
+           margin: auto;
+           background-color: black;
+       }
+       /*Change Loading*/
+       :root {
+           --first-color : #7000FF;
+           --second-color: #D8FDFF;
+           --black-color: #000;
+       }
+       #loader {
+           background-color: white;
+           /*width: 100% !important;*/
+           /*height: 100% !important;*/
+       }
+       #progress{
+           top: 50%;
+       }
+       #progress #full {
+           background: linear-gradient(90deg, rgba(83,136,229,1) 19%, rgba(109,63,240,1) 87%);
+           height:15px!important;
+           border-radius:15px;
+       }
+       #progress p{
+           color:#6d3ff0;
+           font-family: Arial, Helvetica, sans-serif;;
+       }
+       #logo{
+          position: absolute;
+           width: 50%;
+           top: 25%;
+           left: 0;
+           right: 0;
+           margin: auto;
+           z-index: 3;
+       }
+       #thumbnail_game{
+           position: absolute;
+           bottom: -5px;
+           margin: auto;
+       }
+       #thumbnail_game img,
+       #logo img {
+           width: 100%;
+           height: auto;
+           bottom:0;
+       }
+       #thumbnail_game img{
+           height: 100%;
+       }
+       /* Medium devices (tablets, less than 992px) */
+       @media (max-width: 575.98px){
+            #thumbnail_game img{
+                width: 100% !important;
+            }
+       }
+   </style>
+  </head>
+  <body style="text-align: center">
+    <div id="loader">
+        <input type="file" id="avatar" hidden>
+        <div id="logo">
+            <img src="./load-logo.png" alt="logo">
+        </div>
+        <div id="thumbnail_game">
+                <img src="./load-bottom.png" alt="thumbnail_game">
+        </div>
+        <div id="progress">
+            <div id="full"></div>
+            <p>Loading</p>
+        </div>
+    </div>
+    <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #231F20"></canvas>
+    <script src="Build/Builds.loader.js"></script>
+    <script>
+        let load_id = null;
+        var uploadButton = document.getElementById("avatar");
+        uploadButton.onchange = function (event) {
+            window.unityInstance.SendMessage('Canvas', 'FileSelected', URL.createObjectURL(event.target.files[0]));
+        }
+
+        function uploadImages() {
+            uploadButton.click();
+        }
+        function downloadURI(uri, name) {
+        var link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        link.click();
+        }
+        function shareFBImage() {
+        FB.init({ appId: `your appid`, status: true, cookie: true });
+        FB.ui(
+        {
+        method: `share`,
+        name: 'Facebook Dialogs',
+        href: $(location).attr('href'),
+        link: 'https://developers.facebook.com/docs/dialogs/',
+        picture: 'your image url',
+        caption: 'Ishelf Book',
+        description: 'your description'
+        },
+        function (response) {
+        if (response && response.post_id) {
+        alert('success');
+        } else {
+        alert('error');
+        }
+        }
+        );
+    }
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/Builds.data.unityweb",
+        frameworkUrl: "Build/Builds.framework.js.unityweb",
+        codeUrl: "Build/Builds.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "marvyco",
+        productName: "minigames",
+        productVersion: "1.0",
+        matchWebGLToCanvasSize: true, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        devicePixelRatio: 2,
+        preserveDrawingBuffer:true, // Uncomment this to override low DPI rendering on high DPI displays.
+      },(progress) => {
+        console.log(100 * progress + "%");
+        document.getElementById("full").style.transform = `scaleX(${progress * 0.8})`;
+      }).then((unityInstance) => {          
+          window.unityInstance = unityInstance;
+          var pro = 0.8;
+          clearInterval(load_id);
+          load_id = setInterval(() => {
+              if (pro < 1.0) {
+                  pro += 0.001;
+                  document.getElementById("full").style.transform = `scaleX(${pro})`;
+              } else {
+                  document.getElementById("loader").style.display = "none";
+                  clearInterval(load_id);
+              }
+          }, 2);
+      });
+      var unityCanvas = document.getElementById("unity-canvas");
+      var loaderContainer = document.getElementById("loader");
+
+      function scale() {
+          var factorCanvas = window.innerHeight / window.innerWidth;
+          if (factorCanvas < (16 / 9)) { 
+              console.log("Under"+ factorCanvas);
+              unityCanvas.style.width = window.innerHeight*(9/16) + "px" ;
+              unityCanvas.style.height = window.innerHeight + "px" ;
+
+              loaderContainer.style.width = window.innerHeight * (9 / 16) + "px";
+              loaderContainer.style.height = window.innerHeight + "px";
+          }
+          else {
+            console.log("Above"+ factorCanvas);
+            unityCanvas.style.width = window.innerWidth + "px" ;
+            unityCanvas.style.height = window.innerWidth*(16/9) + "px" ;
+
+            loaderContainer.style.width = window.innerWidth + "px";
+            loaderContainer.style.height = window.innerWidth * (16 / 9) + "px";
+          } 
+      }
+      scale();
+      window.addEventListener("resize", resizeWindow);
+      function resizeWindow(){
+        scale();
+      }
+      function ReloadConfiguration() {
+        window.unityInstance.SendMessage("GameManager", "OnNativeCallsUpdateConfiguration" );
+      }
+
+    </script>
+    <!-- custom input -->
+    <script>
+        var unityObjectname = "";
+        function SetObjectName(objectName) { unityObjectname = objectName; }
+        function FixInputOnSubmit() {
+            console.log("Sunmit completed");
+			document.getElementById("InputTextnative").blur();
+			event.preventDefault();
+            window.unityInstance.SendMessage(unityObjectname, 'ClearCurrentInput');
+		}        
+        function DeselectNative() {
+            console.log("deselect native input from unity");
+            document.getElementById("InputTextnative").blur();                        
+            window.unityInstance.SendMessage(unityObjectname, 'ClearCurrentInput');            
+        }
+        function FeedUnitty(){
+            var hInput = document.getElementById("InputTextnative");
+            console.log(hInput.value);
+            window.unityInstance.SendMessage(unityObjectname, 'SetInputString', hInput.value);            
+            window.unityInstance.SendMessage(unityObjectname, 'SetCaretPos', hInput.selectionStart);
+        }
+        function SelectInput(stringDefault, caretPosStart, caretPosEnd){
+            var hInput = document.getElementById("InputTextnative");
+            hInput.value = stringDefault;
+            hInput.setSelectionRange(caretPosStart, caretPosEnd);
+            hInput.focus();
+        }
+    </script>
+    <form onsubmit="FixInputOnSubmit()" autocomplete="off" style="width: 0px; height: 0px; position: absolute; top: -9999px;">
+        <input Type = "text" oninput="FeedUnitty()" id="InputTextnative" style="width: 200px; height: 0px; position: absolute; top: -9999px;"/>
+    </form>
+    <!-- custom input -->
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      var origin = urlParams.get('origin');
+       if(origin != null){
+            window.addEventListener('message', event => {
+                // IMPORTANT: check the origin of the data! 
+                if (event.origin.startsWith(origin)) { 
+                    // The data was sent from your site.
+                    // Data sent with postMessage is stored in event.data:
+                    console.log(event.data); 
+                    ReloadConfiguration();
+                } else {
+                    // The data was NOT sent from your site! 
+                    // Be careful! Do not use it. This else branch is
+                    // here just for clarity, you usually shouldn't need it.
+                    return; 
+                } 
+            }); 
+       }
+    </script>
+        
+    <!-- code liên lạc với unity -->
+    <script src="source/main.js"></script>
+    
+    <script>
+        let isProduction = false;
+    </script>
+
+    <script> 
+        function GetIsProduction() { return isProduction; }
+    </script>
+
+<script>
+    function DebugPicture(base64Image) {
+        console.log("Base64 Image Data: ", base64Image);
+/*
+        let imageURL = 'data:image/png;base64,' + base64Image;
+        let newWindow = window.open();
+        newWindow.document.write('<img src="' + imageURL + '" alt="Screenshot" />');
+*/
+        let base64 = "data:image/png;base64," + base64Image;
+  fetch(base64)
+    .then(function (res) {
+      return res.arrayBuffer();
+    })
+    .then(async function (buf) {
+      let file = new File([buf], "filename.png", { type: "image/png" });
+      let files = [file];
+      if (navigator.canShare({ files })) {
+        try {
+          await navigator.share({
+            files,
+            title: "Images",
+            text: "Check out this awesome image!",
+            url: "https://www.youtube.com/watch?v=gLLTusjSps0&ab_channel=EDMForYou",
+          });
+          // output.textContent = "Shared!";
+          console.log("share thanh cong");
+        } catch (error) {
+          // output.textContent = `Error: ${error.message}`;
+          console.log(`share that bai ${error}`);
+        }
+      } else {
+        // output.textContent = `Your system doesn't support sharing these files.`;
+        console.log(`Your system doesn't support sharing these files`);
+      }
+    });
+    }
+</script>
+    
+  </body>
+</html>
