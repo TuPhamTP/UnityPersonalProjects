@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">      <!-- custom input -->
-    <title>Game Name</title>
+    <title>Zombie Incursion | Powered by Octokit</title>
     <style>
         html{
            height: 100%;
@@ -16,6 +16,7 @@
            justify-content: center;
            align-items: center;
            overflow: hidden;
+
        }
 
         #progress {
@@ -40,7 +41,7 @@
        #loader {
            position: absolute;
            margin: auto;
-           background-color: rgb(0, 0, 0);
+           background-color: black;
        }
        /*Change Loading*/
        :root {
@@ -49,7 +50,7 @@
            --black-color: #000;
        }
        #loader {
-           background-color: rgb(255, 255, 255);
+           background-color: white;
            /*width: 100% !important;*/
            /*height: 100% !important;*/
        }
@@ -113,7 +114,6 @@
     <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #231F20"></canvas>
     <script src="Build/Builds.loader.js"></script>
     <script>
-        
         let load_id = null;
         var uploadButton = document.getElementById("avatar");
         uploadButton.onchange = function (event) {
@@ -129,8 +129,27 @@
         link.href = uri;
         link.click();
         }
-        
-
+        function shareFBImage() {
+        FB.init({ appId: `your appid`, status: true, cookie: true });
+        FB.ui(
+        {
+        method: `share`,
+        name: 'Facebook Dialogs',
+        href: $(location).attr('href'),
+        link: 'https://developers.facebook.com/docs/dialogs/',
+        picture: 'your image url',
+        caption: 'Ishelf Book',
+        description: 'your description'
+        },
+        function (response) {
+        if (response && response.post_id) {
+        alert('success');
+        } else {
+        alert('error');
+        }
+        }
+        );
+    }
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/Builds.data.unityweb",
         frameworkUrl: "Build/Builds.framework.js.unityweb",
@@ -186,12 +205,13 @@
       function resizeWindow(){
         scale();
       }
+      function ReloadConfiguration() {
+        window.unityInstance.SendMessage("GameManager", "OnNativeCallsUpdateConfiguration" );
+      }
 
     </script>
-
     <!-- custom input -->
     <script>
-        /*
         var unityObjectname = "";
         function SetObjectName(objectName) { unityObjectname = objectName; }
         function FixInputOnSubmit() {
@@ -217,51 +237,70 @@
             hInput.setSelectionRange(caretPosStart, caretPosEnd);
             hInput.focus();
         }
-        */
     </script>
     <form onsubmit="FixInputOnSubmit()" autocomplete="off" style="width: 0px; height: 0px; position: absolute; top: -9999px;">
         <input Type = "text" oninput="FeedUnitty()" id="InputTextnative" style="width: 200px; height: 0px; position: absolute; top: -9999px;"/>
     </form>
     <!-- custom input -->
-            
     <script>
-        function DebugPicture(base64Image) {
-            //console.log("Base64 Image Data: ", base64Image);
-            /*
-            let imageURL = 'data:image/png;base64,' + base64Image;
-            let newWindow = window.open();
-            newWindow.document.write('<img src="' + imageURL + '" alt="Screenshot" />');
-            */
-            let base64 = "data:image/png;base64," + base64Image;
-            fetch(base64)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                }).then(async function (buf) {
-                        let file = new File([buf], "filename.png", { type: "image/png" });
-                        let files = [file];
-                        if (navigator.canShare({ files })) {
-                            try {
-                                await navigator.share({
-                                    files,
-                                    title: "Images",
-                                    text: "Check out this awesome image!",
-                                    //url: "https://www.youtube.com/watch?v=gLLTusjSps0&ab_channel=EDMForYou",
-                                });
-                                // output.textContent = "Shared!";
-                                console.log("share thanh cong");
-                            } 
-                            catch (error) {
-                                // output.textContent = `Error: ${error.message}`;
-                                console.log(`share that bai ${error}`);
-                            }
-                        } 
-                        else {
-                            // output.textContent = `Your system doesn't support sharing these files.`;
-                            console.log(`Your system doesn't support sharing these files`);
-                        }
-                });
-        }
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      var origin = urlParams.get('origin');
+       if(origin != null){
+            window.addEventListener('message', event => {
+                // IMPORTANT: check the origin of the data! 
+                if (event.origin.startsWith(origin)) { 
+                    // The data was sent from your site.
+                    // Data sent with postMessage is stored in event.data:
+                    console.log(event.data); 
+                    ReloadConfiguration();
+                } else {
+                    // The data was NOT sent from your site! 
+                    // Be careful! Do not use it. This else branch is
+                    // here just for clarity, you usually shouldn't need it.
+                    return; 
+                } 
+            }); 
+       }
     </script>
+        
+<script>
+    function DebugPicture(base64Image) {
+        console.log("Base64 Image Data: ", base64Image);
+/*
+        let imageURL = 'data:image/png;base64,' + base64Image;
+        let newWindow = window.open();
+        newWindow.document.write('<img src="' + imageURL + '" alt="Screenshot" />');
+*/
+        let base64 = "data:image/png;base64," + base64Image;
+  fetch(base64)
+    .then(function (res) {
+      return res.arrayBuffer();
+    })
+    .then(async function (buf) {
+      let file = new File([buf], "filename.png", { type: "image/png" });
+      let files = [file];
+      if (navigator.canShare({ files })) {
+        try {
+          await navigator.share({
+            files,
+            title: "Images",
+            text: "Check out this awesome image!",
+            url: "https://www.youtube.com/watch?v=gLLTusjSps0&ab_channel=EDMForYou",
+          });
+          // output.textContent = "Shared!";
+          console.log("share thanh cong");
+        } catch (error) {
+          // output.textContent = `Error: ${error.message}`;
+          console.log(`share that bai ${error}`);
+        }
+      } else {
+        // output.textContent = `Your system doesn't support sharing these files.`;
+        console.log(`Your system doesn't support sharing these files`);
+      }
+    });
+    }
+</script>
     
   </body>
 </html>
