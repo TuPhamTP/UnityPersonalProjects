@@ -9,14 +9,27 @@
         html{
            height: 100%;
        }
-       body{
-           height:100%;
-           display: flex;
-           margin: 0;
-           justify-content: center;
-           align-items: center;
-           overflow: hidden;
-       }
+        body{
+            height:100%;
+            display: flex;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        body {
+            background-color: #ffffff; /* Default bg color*/
+        }
+
+       @media (min-aspect-ratio: 3/2) {
+            body {
+                background-image: url('./wallpaper.png');
+                background-size: cover;
+                background-position: center;
+                background-color: none; /* hide bg color - show wallpaper*/
+            }
+        }
 
         #progress {
            text-align: bottom;
@@ -110,6 +123,17 @@
             <p>Loading</p>
         </div>
     </div>
+
+    <!-- cover Unity splash screen -->
+    <div id="cover-screen" style="
+        position: absolute;
+        width: 960px;
+        height: 540px;
+        background-color: rgb(0, 0, 0);
+        z-index: 9999;
+        display: none;
+    "></div>
+
     <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #231F20"></canvas>
     <script src="Build/Builds.loader.js"></script>
     <script>
@@ -156,6 +180,19 @@
               } else {
                   document.getElementById("loader").style.display = "none";
                   clearInterval(load_id);
+
+                  // Show cover screen
+                  var coverScreen = document.getElementById("cover-screen");
+                  coverScreen.style.display = "block";
+                
+                  var unityCanvas = document.getElementById("unity-canvas");
+                  coverScreen.style.width = unityCanvas.style.width;
+                  coverScreen.style.height = unityCanvas.style.height;
+
+                  // Hide cover screen
+                  setTimeout(() => {
+                      coverScreen.style.display = "none";
+                  }, 1300);
               }
           }, 2);
       });

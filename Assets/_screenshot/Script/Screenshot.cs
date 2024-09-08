@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Runtime.InteropServices;
@@ -12,7 +11,7 @@ public class Screenshot : MonoBehaviour
     public RectTransform panelToCapture; 
     public Image ResultImg;
 
-    private void Start()
+    private void Start()    
     {
         if (Application.platform == RuntimePlatform.WebGLPlayer) UnityEngine.WebGLInput.captureAllKeyboardInput = true;
     }
@@ -35,11 +34,9 @@ public class Screenshot : MonoBehaviour
         byte[] imageBytes = screenshot.EncodeToPNG();
         string base64String = System.Convert.ToBase64String(imageBytes);
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-        DebugPictureJS(base64String);
-#endif
-
-
+        #if UNITY_WEBGL && !UNITY_EDITOR
+                DebugPictureJS(base64String);
+        #endif
 
         Vector2 panelPosition = panelToCapture.transform.position;
         int panelWidth = (int)panelToCapture.rect.width;
@@ -57,15 +54,13 @@ public class Screenshot : MonoBehaviour
         Sprite newSprite = Sprite.Create(panelScreenshot, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f));
         ResultImg.sprite = newSprite;
 
-
     }
 }
 
 
 /*
-screenshot world
-
-public Camera uiCamera;
+    //Screenshot world
+    public Camera uiCamera;
     public RectTransform panelToCapture;  
     public Image ResultImg; 
 
