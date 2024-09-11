@@ -5,13 +5,24 @@ public class BackgroundSpriteRenderer : MonoBehaviour
 {
     private void OnValidate()
     {
-        ResizeSpriteToScreen(false);
+        //ResizeSpriteToScreen(false);
     }
     public void UpdateScaling()
     {
-        OnValidate();
+        //OnValidate();
     }
-        
+
+    private void Start()
+    {
+        ResizeSpriteToScreen(false);
+        //Invoke(nameof(ResizeTrue), 8);
+    }
+
+    void ResizeTrue()
+    {
+        ResizeSpriteToScreen(true);
+        this.GetComponent<SpriteRenderer>().color = Color.red;
+    }
 
 
     private void ResizeSpriteToScreen(bool keepAspect = false)
