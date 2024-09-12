@@ -124,14 +124,18 @@
         </div>
     </div>
 
-    <!-- cover Unity splash screen -->
+    <!-- cover Unity splash screen 
+        background-color: rgb(0, 0, 0);
+     -->
     <div id="cover-screen" style="
         position: absolute;
-        width: 960px;
-        height: 540px;
-        background-color: rgb(0, 0, 0);
-        z-index: 9999;
-        display: none;
+    background-image: url('splashscreen.png');
+    background-size: cover;
+    z-index: 9999;
+    display: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     "></div>
 
     <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #231F20"></canvas>
@@ -183,11 +187,12 @@
 
                   // Show cover screen
                   var coverScreen = document.getElementById("cover-screen");
+                  updateSplashScreen();//
                   coverScreen.style.display = "block";
                 
                   var unityCanvas = document.getElementById("unity-canvas");
-                  coverScreen.style.width = unityCanvas.style.width;
-                  coverScreen.style.height = unityCanvas.style.height;
+                  //coverScreen.style.width = unityCanvas.style.width;
+                  //coverScreen.style.height = unityCanvas.style.height;
 
                   // Hide cover screen
                   setTimeout(() => {
@@ -224,81 +229,36 @@
         scale();
       }
 
+      function updateSplashScreen() {
+        var screenRatio = window.innerWidth / window.innerHeight;
+        var targetRatio = 9 / 16;
+        var coverScreen = document.getElementById("cover-screen");
+
+        if (screenRatio < targetRatio) {
+            coverScreen.style.width = window.innerWidth + "px";
+            coverScreen.style.height = (window.innerWidth * 16 / 9) + "px";
+        } else {
+            coverScreen.style.width = (window.innerHeight * 9 / 16) + "px";
+            coverScreen.style.height = window.innerHeight + "px";
+        }
+
+        coverScreen.style.left = "50%";
+        coverScreen.style.top = "50%";
+        coverScreen.style.transform = "translate(-50%, -50%)";
+      }
+
     </script>
 
-    <!-- custom input -->
-    <script>
-        /*
-        var unityObjectname = "";
-        function SetObjectName(objectName) { unityObjectname = objectName; }
-        function FixInputOnSubmit() {
-            console.log("Sunmit completed");
-			document.getElementById("InputTextnative").blur();
-			event.preventDefault();
-            window.unityInstance.SendMessage(unityObjectname, 'ClearCurrentInput');
-		}        
-        function DeselectNative() {
-            console.log("deselect native input from unity");
-            document.getElementById("InputTextnative").blur();                        
-            window.unityInstance.SendMessage(unityObjectname, 'ClearCurrentInput');            
-        }
-        function FeedUnitty(){
-            var hInput = document.getElementById("InputTextnative");
-            console.log(hInput.value);
-            window.unityInstance.SendMessage(unityObjectname, 'SetInputString', hInput.value);            
-            window.unityInstance.SendMessage(unityObjectname, 'SetCaretPos', hInput.selectionStart);
-        }
-        function SelectInput(stringDefault, caretPosStart, caretPosEnd){
-            var hInput = document.getElementById("InputTextnative");
-            hInput.value = stringDefault;
-            hInput.setSelectionRange(caretPosStart, caretPosEnd);
-            hInput.focus();
-        }
-        */
-    </script>
+    
     <form onsubmit="FixInputOnSubmit()" autocomplete="off" style="width: 0px; height: 0px; position: absolute; top: -9999px;">
         <input Type = "text" oninput="FeedUnitty()" id="InputTextnative" style="width: 200px; height: 0px; position: absolute; top: -9999px;"/>
     </form>
-    <!-- custom input -->
-            
+
     <script>
-        function DebugPicture(base64Image) {
-            //console.log("Base64 Image Data: ", base64Image);
-            /*
-            let imageURL = 'data:image/png;base64,' + base64Image;
-            let newWindow = window.open();
-            newWindow.document.write('<img src="' + imageURL + '" alt="Screenshot" />');
-            */
-            let base64 = "data:image/png;base64," + base64Image;
-            fetch(base64)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                }).then(async function (buf) {
-                        let file = new File([buf], "filename.png", { type: "image/png" });
-                        let files = [file];
-                        if (navigator.canShare({ files })) {
-                            try {
-                                await navigator.share({
-                                    files,
-                                    title: "Images",
-                                    text: "Check out this awesome image!",
-                                    //url: "https://www.youtube.com/watch?v=gLLTusjSps0&ab_channel=EDMForYou",
-                                });
-                                // output.textContent = "Shared!";
-                                console.log("share thanh cong");
-                            } 
-                            catch (error) {
-                                // output.textContent = `Error: ${error.message}`;
-                                console.log(`share that bai ${error}`);
-                            }
-                        } 
-                        else {
-                            // output.textContent = `Your system doesn't support sharing these files.`;
-                            console.log(`Your system doesn't support sharing these files`);
-                        }
-                });
+        function NativeOpenWebsite() {
+            window.open("https://www.google.com/", "_blank");
         }
     </script>
-    
+          
   </body>
 </html>

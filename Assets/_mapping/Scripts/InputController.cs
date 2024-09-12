@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using DG.Tweening;
 
 public class InputController : MonoBehaviour
 {
+    [DllImport("__Internal")]
+    private static extern void OpenWebsite();
+
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dots;
     [SerializeField] private SpriteRenderer[] _textNoSRs;
@@ -54,6 +58,15 @@ public class InputController : MonoBehaviour
         {
             _roadSRs[i].color = _transparentColor;
             _dots[i].transform.localScale = Vector3.zero;
+        }
+    }
+
+    public void CliclReadMore()
+    { 
+        if (_currentID == _textNoSRs.Length - 1)
+        {
+            //Debug.Log("open web");
+            OpenWebsite();
         }
     }
 
