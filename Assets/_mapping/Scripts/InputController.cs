@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class InputController : MonoBehaviour
 {
     [DllImport("__Internal")]
     private static extern void OpenWebsite();
 
+    //[SerializeField] private PinchZoom _pinchZoom;
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dotSRs;
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
@@ -20,6 +22,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private Transform _tapIconStart, _tapIconEnd;
     [SerializeField] private GameObject _panelMap;
     [SerializeField] private GameObject _txtStart;
+    //public Text _txt2;
 
     private List<Sprite> _currentTxtStations = new List<Sprite>();
     private List<Sprite> _currentTxtStationBlurs = new List<Sprite>();
@@ -34,21 +37,35 @@ public class InputController : MonoBehaviour
     private bool _openedWebsite;
     private bool _canDrag;
 
-    void Start()
-    {
-        // Calculate the background bounds based on the SpriteRenderer size
-        SpriteRenderer backgroundSprite = _background.GetComponent<SpriteRenderer>();
-        Vector2 backgroundSize = backgroundSprite.bounds.size;
+    float camHeight;
+    float camWidth;
+    SpriteRenderer backgroundSprite;
+    Vector2 backgroundSize;
 
+    private void CalculateBound()
+    {
         // Get the camera's size based on its orthographic size
-        float camHeight = _mainCamera.orthographicSize * 2;
-        float camWidth = camHeight * _mainCamera.aspect;
+        camHeight = _mainCamera.orthographicSize * 2;
+        camWidth = camHeight * _mainCamera.aspect;
 
         // Calculate the minimum and maximum boundaries the camera can move
         _minBgBound = (Vector2)_background.position - backgroundSize / 2 + new Vector2(camWidth / 2, camHeight / 2);
         _maxBgBound = (Vector2)_background.position + backgroundSize / 2 - new Vector2(camWidth / 2, camHeight / 2);
+    }
 
-        _mainCamera.transform.position = _startCameraPos;
+    void Start()
+    {
+        DOVirtual.DelayedCall(0.2f, () =>
+        {
+            // Calculate the background bounds based on the SpriteRenderer size
+            backgroundSprite = _background.GetComponent<SpriteRenderer>();
+            backgroundSize = backgroundSprite.bounds.size;
+        });
+        
+
+        CalculateBound();
+
+        //_mainCamera.transform.position = _startCameraPos;
 
         for (int i = 0; i < _txtStationViewMoreBlurs.Length; i++)
         {
@@ -68,6 +85,8 @@ public class InputController : MonoBehaviour
         _tapIcon.SetActive(false);
         _tapIconDirection = (_tapIconEnd.position - _tapIconStart.position).normalized;
         _tapIcon.transform.position = _tapIconStart.position;
+
+        _txt.text = mainCamera.orthographicSize.ToString();
     }
 
     public void ClickSeeDetails()
@@ -191,21 +210,90 @@ public class InputController : MonoBehaviour
         else { _tapIcon.SetActive(false); }
     }
 
+    private Vector3 _mousePos;
+    private Vector3 _originalDistance;
     private void CheckInput()
     {
-        // Start dragging
-        if (Input.GetMouseButtonDown(0))
+        //_txt2.text = (Input.touchCount == 1).ToString() + "--" + ()
+        if ((Input.touchCount == 1))// || Input.GetMouseButton(0)
         {
-            _dragOrigin = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            if (_canTouch1)
+            {
+                isZooming = false;
+                CalculateBound();
+                // Start dragging
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _dragOrigin = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                }
+
+                // Continue dragging
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 difference = _dragOrigin - _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                    _mainCamera.transform.position = ClampCamera(_mainCamera.transform.position + difference);
+                }
+            }
+            
+        }
+        else if (Input.touchCount == 2)
+        {
+            Zoom();
+        }
+        else { isZooming = false; }
+            
+    }
+
+    public Camera mainCamera;
+    public Text _txt;
+
+    private float zoomSpeed = 0.0001f;
+    private float minZoom = 1f;
+    private float maxZoom = 5f;
+
+    private bool isZooming = false;
+    private float initialTouchDistance;
+    private float zoomThreshold = 0.1f;
+
+    public void Zoom()
+    {
+        Touch touchZero = Input.GetTouch(0);
+        Touch touchOne = Input.GetTouch(1);
+
+        float currentTouchDistance = (touchZero.position - touchOne.position).magnitude;
+
+        if (!isZooming)
+        {
+            initialTouchDistance = currentTouchDistance;
+            isZooming = true;
+        }
+        else
+        {
+            float distanceDifference = Mathf.Abs(currentTouchDistance - initialTouchDistance);
+
+            if (distanceDifference > zoomThreshold)
+            {
+                float deltaMagnitudeDiff = initialTouchDistance - currentTouchDistance;
+
+                mainCamera.orthographicSize += deltaMagnitudeDiff * zoomSpeed;
+
+                mainCamera.orthographicSize = Mathf.Clamp(mainCamera.orthographicSize, minZoom, maxZoom);
+            }
         }
 
-        // Continue dragging
-        if (Input.GetMouseButton(0))
+        _txt.text = mainCamera.orthographicSize.ToString() + "-" + (Input.touchCount == 2).ToString();
+
+        if (touchZero.phase == TouchPhase.Ended || touchOne.phase == TouchPhase.Ended ||
+            touchZero.phase == TouchPhase.Canceled || touchOne.phase == TouchPhase.Canceled)
         {
-            Vector3 difference = _dragOrigin - _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            _mainCamera.transform.position = ClampCamera(_mainCamera.transform.position + difference);
+            isZooming = false;
+            _canTouch1 = false;
+            Invoke(nameof(SetTouch1), 0.2f);
         }
     }
+
+    bool _canTouch1 = true;
+    private void SetTouch1() { _canTouch1 = true; }
 
     // Clamp the camera position to the background bounds
     float _clampedX, _clampedY;
