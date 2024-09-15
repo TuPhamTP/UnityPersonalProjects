@@ -6,4 +6,7 @@ mergeInto(LibraryManager.library, {
   OpenWebsite: function() {
         NativeOpenWebsite();
     },
+  GetDeviceType: function() {
+        return NativeCheckDevice()? 1: 0;
+    },
 });

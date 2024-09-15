@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class InputController : MonoBehaviour
 {
-    [DllImport("__Internal")]
-    private static extern void OpenWebsite();
+    [DllImport("__Internal")] private static extern void OpenWebsite();
+    [DllImport("__Internal")] private static extern int GetDeviceType();
 
     //[SerializeField] private PinchZoom _pinchZoom;
     [SerializeField] private SpriteRenderer[] _roadSRs;
@@ -22,7 +22,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private Transform _tapIconStart, _tapIconEnd;
     [SerializeField] private GameObject _panelMap;
     [SerializeField] private GameObject _txtStart;
-    //public Text _txt2;
+    public Text _txtDevice;
 
     private List<Sprite> _currentTxtStations = new List<Sprite>();
     private List<Sprite> _currentTxtStationBlurs = new List<Sprite>();
@@ -36,6 +36,7 @@ public class InputController : MonoBehaviour
     private bool _playArrow, _playTapIcon;
     private bool _openedWebsite;
     private bool _canDrag;
+    private bool _isWebGL;
 
     float camHeight;
     float camWidth;
@@ -55,6 +56,13 @@ public class InputController : MonoBehaviour
 
     void Start()
     {
+        _isWebGL = Application.platform == RuntimePlatform.WebGLPlayer;
+        if (_isWebGL)
+        {
+            bool _isPhone = (GetDeviceType() == 1) ? true : false;
+            _txtDevice.text = _isPhone ? "Phone" : "Computers";
+        }
+
         DOVirtual.DelayedCall(0.2f, () =>
         {
             // Calculate the background bounds based on the SpriteRenderer size
@@ -105,7 +113,7 @@ public class InputController : MonoBehaviour
     { 
         if (_currentID == _txtStationSRs.Length - 1)
         {
-            if (Application.platform == RuntimePlatform.WebGLPlayer) { OpenWebsite(); }
+            if (_isWebGL) { OpenWebsite(); }
             else { Debug.Log("open web"); }
             _playTapIcon = false;
             _tapIcon.SetActive(false);

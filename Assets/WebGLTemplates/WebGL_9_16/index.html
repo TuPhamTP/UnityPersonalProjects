@@ -259,6 +259,33 @@
             window.open("https://www.google.com/", "_blank");
         }
     </script>
+
+    <script>
+        function IsMobileDevice() {
+            //Get the User-Agent string of the browser
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            //Check if the User-Agent string contains mobile device keywords
+            if (/android/i.test(userAgent) || 
+                /iPhone|iPad|iPod/i.test(userAgent) ||
+                /windows phone/i.test(userAgent)) {
+                return true;
+            } else { return false; }
+        }  
+        
+        //call by Unity
+        function NativeCheckDevice(){
+            if (IsMobileDevice()) {
+            console.log("Is Phone");
+            //window.unityInstance.SendMessage("InputController", "IsRunOnPhone", "true");//not support boolean and call this function after unityInstance was created
+            return 1;//
+            } else {
+                console.log("Is Computers 1");
+                //window.unityInstance.SendMessage("InputController", "IsRunOnPhone", "false");
+                return 0;//
+            }
+        }        
+    </script>
           
   </body>
 </html>
