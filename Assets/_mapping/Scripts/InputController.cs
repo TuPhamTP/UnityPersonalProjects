@@ -5,14 +5,14 @@ using DG.Tweening;
 
 public class InputController : MonoBehaviour
 {
-    [DllImport("__Internal")]
-    private static extern void OpenWebsite();
+    [DllImport("__Internal")] private static extern void OpenWebsite();
 
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dotSRs;
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
     [SerializeField] private Sprite[] _txtStationViewMoreBlurs, _txtStationBlurs;//*
     [SerializeField] private Sprite[] _txtStationViewMores, _txtStations;
+    [SerializeField] private GameObject[] _viewMoreBtns;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Transform _positionChecker;
     [SerializeField] private Transform _background;
@@ -70,6 +70,7 @@ public class InputController : MonoBehaviour
         _tapIcon.transform.position = _tapIconStart.position;
     }
 
+    #region ClickBtn
     public void ClickSeeDetails()
     {
         DOVirtual.DelayedCall(0.1f, () =>
@@ -79,11 +80,10 @@ public class InputController : MonoBehaviour
             _txtStart.transform.localScale = Vector3.zero;
             _txtStart.transform.DOScale(0.39768f, 1f);
         });
-        
     }
 
     public void CliclReadMore()
-    { 
+    {
         if (_currentID == _txtStationSRs.Length - 1)
         {
             if (Application.platform == RuntimePlatform.WebGLPlayer) { OpenWebsite(); }
@@ -102,8 +102,12 @@ public class InputController : MonoBehaviour
             _currentTxtStationBlurs[indexStation] = _txtStationBlurs[indexStation];
 
             _txtStationSRs[indexStation].sprite = _currentTxtStations[indexStation];
+
+            _viewMoreBtns[indexStation].SetActive(false);
+            Debug.Log("click view more " + indexStation);
         }
     }
+    #endregion
 
     void Update()
     {
@@ -193,13 +197,11 @@ public class InputController : MonoBehaviour
 
     private void CheckInput()
     {
-        // Start dragging
         if (Input.GetMouseButtonDown(0))
         {
             _dragOrigin = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        // Continue dragging
         if (Input.GetMouseButton(0))
         {
             Vector3 difference = _dragOrigin - _mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -207,7 +209,6 @@ public class InputController : MonoBehaviour
         }
     }
 
-    // Clamp the camera position to the background bounds
     float _clampedX, _clampedY;
     float _maxClampedY = 5;
     private Vector3 ClampCamera(Vector3 targetPosition)

@@ -1454,6 +1454,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 19bb3e8a0b5fb7b43830444d40423c41, type: 3}
   - {fileID: 21300000, guid: c5767554ccbbcf74b9532b2922716875, type: 3}
   - {fileID: 21300000, guid: 1017de8a3b713124fbce6c9f1ce77e4b, type: 3}
+  _viewMoreBtns:
+  - {fileID: 1699457699}
+  - {fileID: 1059064122}
+  - {fileID: 844276309}
+  - {fileID: 717330455}
+  - {fileID: 673072632}
+  - {fileID: 15691698}
+  - {fileID: 642144862}
+  - {fileID: 877724105}
   _mainCamera: {fileID: 54730903}
   _positionChecker: {fileID: 1905390569}
   _background: {fileID: 792099625}
