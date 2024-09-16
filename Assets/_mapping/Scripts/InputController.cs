@@ -7,6 +7,7 @@ public class InputController : MonoBehaviour
 {
     [DllImport("__Internal")] private static extern void OpenWebsite();
 
+    [SerializeField] private GameObject BgRef;
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dotSRs;
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
@@ -25,7 +26,7 @@ public class InputController : MonoBehaviour
     private List<Sprite> _currentTxtStationBlurs = new List<Sprite>();
     private Color _transparentColor = new Color(1, 1, 1, 0);
     private Vector3 _tapIconDirection;
-    private Vector3 _startCameraPos = new Vector3(0.73f, -9, -10);
+    private Vector3 _startCameraPos = new Vector3(0, 0, -10);//new Vector3(0.73f, -9, -10);
     private Vector3 _dragOrigin;
     private Vector2 _minBgBound, _maxBgBound;
     private int _currentID = -1;
@@ -34,7 +35,7 @@ public class InputController : MonoBehaviour
     private bool _openedWebsite;
     private bool _canDrag;
 
-    void Start()
+    private void CalculateBgBound()
     {
         // Calculate the background bounds based on the SpriteRenderer size
         SpriteRenderer backgroundSprite = _background.GetComponent<SpriteRenderer>();
@@ -47,6 +48,11 @@ public class InputController : MonoBehaviour
         // Calculate the minimum and maximum boundaries the camera can move
         _minBgBound = (Vector2)_background.position - backgroundSize / 2 + new Vector2(camWidth / 2, camHeight / 2);
         _maxBgBound = (Vector2)_background.position + backgroundSize / 2 - new Vector2(camWidth / 2, camHeight / 2);
+    }
+
+    void Start()
+    {
+        CalculateBgBound();
 
         _mainCamera.transform.position = _startCameraPos;
 
@@ -73,9 +79,14 @@ public class InputController : MonoBehaviour
     #region ClickBtn
     public void ClickSeeDetails()
     {
-        DOVirtual.DelayedCall(0.1f, () =>
+        BgRef.transform.DOScale(1.25f, 2f);
+        _mainCamera.transform.DOMove(new Vector3(0.73f, -9, -10), 2f);
+        _panelMap.SetActive(false);
+        _txtStart.transform.localScale = Vector3.zero;
+
+        DOVirtual.DelayedCall(2.1f, () =>
         {
-            _panelMap.SetActive(false);
+            CalculateBgBound();
             _canDrag = true;
             _txtStart.transform.localScale = Vector3.zero;
             _txtStart.transform.DOScale(0.39768f, 1f);
