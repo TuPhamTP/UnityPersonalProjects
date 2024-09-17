@@ -6,6 +6,7 @@ using DG.Tweening;
 public class InputController : MonoBehaviour
 {
     [DllImport("__Internal")] private static extern void OpenWebsite();
+    [DllImport("__Internal")] private static extern void ClickBtnCount(int index);
 
     [SerializeField] private GameObject BgRef;
     [SerializeField] private SpriteRenderer[] _roadSRs;
@@ -97,7 +98,11 @@ public class InputController : MonoBehaviour
     {
         if (_currentID == _txtStationSRs.Length - 1)
         {
-            if (Application.platform == RuntimePlatform.WebGLPlayer) { OpenWebsite(); }
+            if (Application.platform == RuntimePlatform.WebGLPlayer) 
+            { 
+                OpenWebsite();
+                ClickBtnCount(8);
+            }
             else { Debug.Log("open web"); }
             _playTapIcon = false;
             _tapIcon.SetActive(false);
@@ -116,6 +121,10 @@ public class InputController : MonoBehaviour
 
             _viewMoreBtns[indexStation].SetActive(false);
             Debug.Log("click view more " + indexStation);
+            _roadSRs[indexStation].transform.GetChild(0).gameObject.SetActive(true);
+
+            if (Application.platform == RuntimePlatform.WebGLPlayer) { ClickBtnCount(indexStation); }
+            else { Debug.Log("indexStation = " + indexStation); }
         }
     }
     #endregion

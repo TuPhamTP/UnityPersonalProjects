@@ -6,4 +6,7 @@ mergeInto(LibraryManager.library, {
   OpenWebsite: function() {
         NativeOpenWebsite();
     },
+  ClickBtnCount: function(index){
+        NativeClickBtnCount(index);
+  },
 });

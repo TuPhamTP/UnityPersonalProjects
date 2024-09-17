@@ -5,6 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">      <!-- custom input -->
     <title>Game Name</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         html{
            height: 100%;
@@ -274,8 +276,70 @@
 
     <script>
         function NativeOpenWebsite() {
-            window.open("https://www.google.com/", "_blank");
+            window.open("https://pizza4ps.com/vn/library/2914/", "_blank");
         }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-X55MX0CJ3Q"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-X55MX0CJ3Q");
+    </script>
+    <script>
+        function pushbtnEventGoogle({
+            event = "gtmEvent",
+            name = "",
+            label = "",
+            category = "",
+            action = "Click",
+        }) {
+            const events = {
+                event: event,
+                eventName: name,
+                eventCategory: category,
+                eventAction: action,
+                eventLabel: label,
+            };
+            console.log(events);
+            gtag("event", name, events);
+            // if (typeof dataLayer !== "undefined") {
+            //     console.log("push event");
+            //     dataLayer.push(events);
+            // }
+        }
+    
+        function NativeClickBtnCount(index) {
+            const dataObjects = [
+                { event: "gtmEvent", name: "Content - Click View more 1", label: "Btn - Click View more 1", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 2", label: "Btn - Click View more 2", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 3", label: "Btn - Click View more 3", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 4", label: "Btn - Click View more 4", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 5", label: "Btn - Click View more 5", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 6", label: "Btn - Click View more 6", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 7", label: "Btn - Click View more 7", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click View more 8", label: "Btn - Click View more 8", category: "Home", action: "Click" },
+                { event: "gtmEvent", name: "Content - Click Article", label: "Btn - Click Article", category: "Home", action: "Click" }
+            ];
+
+            const dataObj = dataObjects[index]; 
+
+            if (dataObj) {
+                pushbtnEventGoogle(dataObj);
+            } else {
+                console.error("Invalid index passed to NativeClickBtnCount: " + index);
+            }
+}
+        
+
     </script>
           
   </body>
