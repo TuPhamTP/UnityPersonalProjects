@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class InputController : MonoBehaviour
@@ -14,6 +15,8 @@ public class InputController : MonoBehaviour
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
     [SerializeField] private Sprite[] _txtStationViewMoreBlurs, _txtStationBlurs;//*
     [SerializeField] private Sprite[] _txtStationViewMores, _txtStations;
+    [SerializeField] private Sprite _btnVN, _btnEN;
+    [SerializeField] private Image _btnLanguage;
     [SerializeField] private GameObject[] _viewMoreBtns;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Transform _positionChecker;
@@ -82,15 +85,15 @@ public class InputController : MonoBehaviour
     private bool _isVNLanguage;
     public void ClickLangueBtn()
     {
+        _isVNLanguage = !_isVNLanguage;
         if (_isVNLanguage)
         {
-
+            _btnLanguage.sprite = _btnVN;
         }
         else
         {
-
+            _btnLanguage.sprite = _btnEN;
         }
-        _isVNLanguage = !_isVNLanguage;
     }
 
 
