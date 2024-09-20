@@ -13,8 +13,10 @@ public class InputController : MonoBehaviour
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dotSRs;
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
-    [SerializeField] private Sprite[] _txtStationViewMoreBlurs, _txtStationBlurs;//*
-    [SerializeField] private Sprite[] _txtStationViewMores, _txtStations;
+    [SerializeField] private Sprite[] _txtStationViewMoreBlursEN, _txtStationBlursEN;//*
+    [SerializeField] private Sprite[] _txtStationViewMoresEN, _txtStationsEN;
+    [SerializeField] private Sprite[] _txtStationViewMoreBlursVN, _txtStationBlursVN;//*
+    [SerializeField] private Sprite[] _txtStationViewMoresVN, _txtStationsVN;
     [SerializeField] private Sprite _btnVN, _btnEN;
     [SerializeField] private Image _btnLanguage;
     [SerializeField] private GameObject[] _viewMoreBtns;
@@ -25,6 +27,28 @@ public class InputController : MonoBehaviour
     [SerializeField] private Transform _tapIconStart, _tapIconEnd;
     [SerializeField] private GameObject _panelMap;
     [SerializeField] private GameObject _txtStart;
+
+    [SerializeField] private Sprite _bgRefEN, _bgRefVN;
+    [SerializeField] private Image _panelBg;
+    [SerializeField] private Sprite _clickStartEN, _clickStartVN;
+    [SerializeField] private Image _clickStart;
+    [SerializeField] private Sprite _titleEN, _titleVN;
+    [SerializeField] private SpriteRenderer _title;
+    [SerializeField] private Sprite _txtStartEN, _txtStartVN;
+    [SerializeField] private SpriteRenderer _txtStartSR;
+
+    [SerializeField] private GameObject _handClick;
+    private bool _playHandClick = true;
+    private int _handClickDir = 1;
+
+    [SerializeField] private GameObject _handDrag;
+    [SerializeField] private Transform _handDragStart, _handDragEnd;
+    private bool _playHandDrag;
+
+    private Sprite[] _txtStationViewMoreBlursLoad = new Sprite[9];
+    private Sprite[] _txtStationBlursLoad = new Sprite[9];
+    private Sprite[] _txtStationViewMoresLoad = new Sprite[9];
+    private Sprite[] _txtStationsLoad = new Sprite[9];
 
     private List<Sprite> _currentTxtStations = new List<Sprite>();
     private List<Sprite> _currentTxtStationBlurs = new List<Sprite>();
@@ -57,15 +81,13 @@ public class InputController : MonoBehaviour
     void Start()
     {
         CalculateBgBound();
-
         _mainCamera.transform.position = _startCameraPos;
 
-        for (int i = 0; i < _txtStationViewMoreBlurs.Length; i++)
-        {
-            _currentTxtStationBlurs.Add(_txtStationViewMoreBlurs[i]);
-            _currentTxtStations.Add(_txtStationViewMores[i]);
+        ClickLangueBtn();
 
-            _txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
+        for (int i = 0; i < _txtStationViewMoreBlursLoad.Length; i++)
+        {
+            //_txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
         }
 
         for (int i = 0; i < _roadSRs.Length; i++)
@@ -74,26 +96,70 @@ public class InputController : MonoBehaviour
             _dotSRs[i].transform.localScale = Vector3.zero;
         }
 
+        _handDrag.SetActive(false);
         _arrow.SetActive(false);
         _tapIcon.SetActive(false);
         _tapIconDirection = (_tapIconEnd.position - _tapIconStart.position).normalized;
         _tapIcon.transform.position = _tapIconStart.position;
     }
 
+    private void SetUpCurrentTxtStationSprite()
+    {
+        _currentTxtStationBlurs.Clear();
+        _currentTxtStations.Clear();
+        for (int i = 0; i < _txtStationViewMoreBlursLoad.Length; i++)
+        {
+            _currentTxtStationBlurs.Add(_txtStationViewMoreBlursLoad[i]);
+            _currentTxtStations.Add(_txtStationViewMoresLoad[i]);
+
+            _txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
+        }
+    }
+
+    private void PlayHandClick()
+    {
+        if (_handClick.transform.localScale.x > 1.3f) { _handClickDir = -1; }
+        else if (_handClick.transform.localScale.x < 0.8f) { _handClickDir = 1; }
+        _handClick.transform.localScale += Vector3.one * Time.deltaTime * _handClickDir * 0.75f;
+    }
+
     #region ClickBtn
 
-    private bool _isVNLanguage;
+    private bool _isVNLanguage = true;
     public void ClickLangueBtn()
     {
         _isVNLanguage = !_isVNLanguage;
         if (_isVNLanguage)
         {
             _btnLanguage.sprite = _btnVN;
+            for (int i = 0; i < 9; i++)
+            {
+                _txtStationViewMoreBlursLoad[i] = _txtStationViewMoreBlursVN[i];
+                _txtStationBlursLoad[i] = _txtStationBlursVN[i];
+                _txtStationViewMoresLoad[i] = _txtStationViewMoresVN[i];
+                _txtStationsLoad[i] = _txtStationsVN[i];
+            }
+            _panelBg.sprite = _bgRefVN;
+            _clickStart.sprite = _clickStartVN;
+            _title.sprite = _titleVN;
+            _txtStartSR.sprite = _txtStartVN;
         }
         else
         {
             _btnLanguage.sprite = _btnEN;
+            for (int i = 0; i < 9; i++)
+            {
+                _txtStationViewMoreBlursLoad[i] = _txtStationViewMoreBlursEN[i];
+                _txtStationBlursLoad[i] = _txtStationBlursEN[i];
+                _txtStationViewMoresLoad[i] = _txtStationViewMoresEN[i];
+                _txtStationsLoad[i] = _txtStationsEN[i];
+            }
+            _panelBg.sprite = _bgRefEN;
+            _clickStart.sprite = _clickStartEN;
+            _title.sprite = _titleEN;
+            _txtStartSR.sprite = _txtStartEN;
         }
+        SetUpCurrentTxtStationSprite();
     }
 
 
@@ -103,13 +169,19 @@ public class InputController : MonoBehaviour
         _mainCamera.transform.DOMove(new Vector3(0.73f, -9, -10), 2f);
         _panelMap.SetActive(false);
         _txtStart.transform.localScale = Vector3.zero;
+        _playHandClick = false;
 
         DOVirtual.DelayedCall(2.1f, () =>
         {
             CalculateBgBound();
             _canDrag = true;
             _txtStart.transform.localScale = Vector3.zero;
-            _txtStart.transform.DOScale(0.39768f, 1f);
+            _txtStart.transform.DOScale(0.39768f, 1f).OnComplete(()=> 
+            {
+                _handDrag.transform.position = _handDragStart.position;
+                _handDrag.SetActive(true);
+                _playHandDrag = true; 
+            });
         });
     }
 
@@ -133,8 +205,8 @@ public class InputController : MonoBehaviour
     {
         if (_currentID == indexStation)
         {
-            _currentTxtStations[indexStation] = _txtStations[indexStation];
-            _currentTxtStationBlurs[indexStation] = _txtStationBlurs[indexStation];
+            _currentTxtStations[indexStation] = _txtStationsLoad[indexStation];
+            _currentTxtStationBlurs[indexStation] = _txtStationBlursLoad[indexStation];
 
             _txtStationSRs[indexStation].sprite = _currentTxtStations[indexStation];
 
@@ -172,8 +244,17 @@ public class InputController : MonoBehaviour
                 }
                 else { _tapIcon.transform.position = _tapIconStart.position; }
             }
+
+            if (_playHandDrag)
+            {
+                if (_handDrag.transform.position.y > _handDragEnd.position.y)
+                {
+                    _handDrag.transform.position += Vector3.down * Time.deltaTime * 1.2f;
+                }
+                else { _handDrag.transform.position = _handDragStart.position; }
+            }
         }
-        
+        if (_playHandClick) { PlayHandClick(); }
     }
 
     Vector3 _worldPositionChecker;
@@ -196,6 +277,9 @@ public class InputController : MonoBehaviour
 
     void UpdateSprites(int newIndex)
     {
+        _playHandDrag = false;
+        _handDrag.SetActive(false);
+
         for (int i = 0; i < _txtStationSRs.Length; i++)
         {
             _txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
@@ -249,7 +333,7 @@ public class InputController : MonoBehaviour
     }
 
     float _clampedX, _clampedY;
-    float _maxClampedY = 5;
+    float _maxClampedY = 5.2f;
     private Vector3 ClampCamera(Vector3 targetPosition)
     {
         _clampedX = Mathf.Clamp(targetPosition.x, _minBgBound.x, _maxBgBound.x);
