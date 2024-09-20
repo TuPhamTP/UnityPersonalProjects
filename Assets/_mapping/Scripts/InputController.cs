@@ -78,6 +78,22 @@ public class InputController : MonoBehaviour
     }
 
     #region ClickBtn
+
+    private bool _isVNLanguage;
+    public void ClickLangueBtn()
+    {
+        if (_isVNLanguage)
+        {
+
+        }
+        else
+        {
+
+        }
+        _isVNLanguage = !_isVNLanguage;
+    }
+
+
     public void ClickSeeDetails()
     {
         BgRef.transform.DOScale(1.25f, 2f);
