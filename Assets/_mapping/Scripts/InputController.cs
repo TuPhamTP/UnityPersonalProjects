@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +13,10 @@ public class InputController : MonoBehaviour
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dotSRs;
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
-    [SerializeField] private Sprite[] _txtStationViewMoreBlursEN, _txtStationBlursEN;//*
-    [SerializeField] private Sprite[] _txtStationViewMoresEN, _txtStationsEN;
-    [SerializeField] private Sprite[] _txtStationViewMoreBlursVN, _txtStationBlursVN;//*
-    [SerializeField] private Sprite[] _txtStationViewMoresVN, _txtStationsVN;
+    [SerializeField] private Sprite[] _txtStationViewMoreBlursEN;
+    [SerializeField] private Sprite[] _txtStationViewMoresEN;
+    [SerializeField] private Sprite[] _txtStationViewMoreBlursVN;
+    [SerializeField] private Sprite[] _txtStationViewMoresVN;
     [SerializeField] private Sprite _btnVN, _btnEN;
     [SerializeField] private Image _btnLanguage;
     [SerializeField] private GameObject[] _viewMoreBtns;
@@ -27,6 +27,9 @@ public class InputController : MonoBehaviour
     [SerializeField] private Transform _tapIconStart, _tapIconEnd;
     [SerializeField] private GameObject _panelMap;
     [SerializeField] private GameObject _txtStart;
+    [SerializeField] private GameObject _panelPopUp;
+    [SerializeField] private Transform _popUp;
+    [SerializeField] private Text _txtBtnBack;
 
     [SerializeField] private Sprite _bgRefEN, _bgRefVN;
     [SerializeField] private Image _panelBg;
@@ -46,9 +49,7 @@ public class InputController : MonoBehaviour
     private bool _playHandDrag;
 
     private Sprite[] _txtStationViewMoreBlursLoad = new Sprite[9];
-    private Sprite[] _txtStationBlursLoad = new Sprite[9];
     private Sprite[] _txtStationViewMoresLoad = new Sprite[9];
-    private Sprite[] _txtStationsLoad = new Sprite[9];
 
     private List<Sprite> _currentTxtStations = new List<Sprite>();
     private List<Sprite> _currentTxtStationBlurs = new List<Sprite>();
@@ -85,11 +86,6 @@ public class InputController : MonoBehaviour
 
         ClickLangueBtn();
 
-        for (int i = 0; i < _txtStationViewMoreBlursLoad.Length; i++)
-        {
-            //_txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
-        }
-
         for (int i = 0; i < _roadSRs.Length; i++)
         {
             _roadSRs[i].color = _transparentColor;
@@ -101,6 +97,7 @@ public class InputController : MonoBehaviour
         _tapIcon.SetActive(false);
         _tapIconDirection = (_tapIconEnd.position - _tapIconStart.position).normalized;
         _tapIcon.transform.position = _tapIconStart.position;
+        _panelPopUp.SetActive(false);
     }
 
     private void SetUpCurrentTxtStationSprite()
@@ -135,14 +132,13 @@ public class InputController : MonoBehaviour
             for (int i = 0; i < 9; i++)
             {
                 _txtStationViewMoreBlursLoad[i] = _txtStationViewMoreBlursVN[i];
-                _txtStationBlursLoad[i] = _txtStationBlursVN[i];
                 _txtStationViewMoresLoad[i] = _txtStationViewMoresVN[i];
-                _txtStationsLoad[i] = _txtStationsVN[i];
             }
             _panelBg.sprite = _bgRefVN;
             _clickStart.sprite = _clickStartVN;
             _title.sprite = _titleVN;
             _txtStartSR.sprite = _txtStartVN;
+            _txtBtnBack.text = "Quay lại";
         }
         else
         {
@@ -150,20 +146,19 @@ public class InputController : MonoBehaviour
             for (int i = 0; i < 9; i++)
             {
                 _txtStationViewMoreBlursLoad[i] = _txtStationViewMoreBlursEN[i];
-                _txtStationBlursLoad[i] = _txtStationBlursEN[i];
                 _txtStationViewMoresLoad[i] = _txtStationViewMoresEN[i];
-                _txtStationsLoad[i] = _txtStationsEN[i];
             }
             _panelBg.sprite = _bgRefEN;
             _clickStart.sprite = _clickStartEN;
             _title.sprite = _titleEN;
             _txtStartSR.sprite = _txtStartEN;
+            _txtBtnBack.text = "Back";
         }
         SetUpCurrentTxtStationSprite();
     }
 
 
-    public void ClickSeeDetails()
+    public void ClickSeeDetails()//Click to Start
     {
         BgRef.transform.DOScale(1.25f, 2f);
         _mainCamera.transform.DOMove(new Vector3(0.73f, -9, -10), 2f);
@@ -205,14 +200,12 @@ public class InputController : MonoBehaviour
     {
         if (_currentID == indexStation || (_currentID >= indexStation && indexStation >= 7))
         {
-            _currentTxtStations[indexStation] = _txtStationsLoad[indexStation];
-            _currentTxtStationBlurs[indexStation] = _txtStationBlursLoad[indexStation];
+            //Show Pop Up
+            _popUp.localScale = Vector3.zero;
+            _popUp.DOScale(1, 0.7f);
+            _panelPopUp.SetActive(true);
 
-            _txtStationSRs[indexStation].sprite = _currentTxtStations[indexStation];
-
-            _viewMoreBtns[indexStation].SetActive(false);
             Debug.Log("click view more " + indexStation);
-            _roadSRs[indexStation].transform.GetChild(0).gameObject.SetActive(true);
 
             if (Application.platform == RuntimePlatform.WebGLPlayer) { ClickBtnCount(indexStation); }
             else { Debug.Log("indexStation = " + indexStation); }
@@ -278,6 +271,7 @@ public class InputController : MonoBehaviour
     void UpdateSprites(int newIndex)
     {
         if (newIndex == 8) { return; }
+
         _playHandDrag = false;
         _handDrag.SetActive(false);
 
@@ -285,7 +279,6 @@ public class InputController : MonoBehaviour
         {
             _txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
         }
-
         
         _txtStationSRs[newIndex].sprite = _currentTxtStations[newIndex];
         
