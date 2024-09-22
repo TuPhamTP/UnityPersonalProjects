@@ -75,6 +75,9 @@
            --black-color: #000;
        }
        #loader {
+           /*background-color: rgb(255, 255, 255);*/
+           /*width: 100% !important;*/
+           /*height: 100% !important;*/
            position: absolute;
            background-image: url('./loadingBg.png');
            background-size: contain;
@@ -85,8 +88,6 @@
            display: flex;
            justify-content: center;
            align-items: center;
-           transition: opacity 2s ease;
-           z-index: 10000; 
        }
        #progress{
            top: 60%;
@@ -100,11 +101,52 @@
            color:#ffffff;
            font-family: Arial, Helvetica, sans-serif;;
        }
+       /*
+       #logo{
+          position: absolute;
+           width: 50%;
+           top: 25%;
+           left: 0;
+           right: 0;
+           margin: auto;
+           z-index: 3;
+       }
+       #thumbnail_game{
+           position: absolute;
+           bottom: -5px;
+           margin: auto;
+       }
+       #thumbnail_game img,
+       #logo img {
+           width: 100%;
+           height: auto;
+           bottom:0;
+       }
+       #thumbnail_game img{
+           height: 100%;
+       }
+           */
+       /* Medium devices (tablets, less than 992px) */
+       /* 
+       @media (max-width: 575.98px){
+            #thumbnail_game img{
+                width: 100% !important;
+            }
+       }
+       */
    </style>
   </head>
   <body style="text-align: center">
     <div id="loader">
-        <input type="file" id="avatar" hidden>   
+        <input type="file" id="avatar" hidden>        
+        <!--
+        <div id="logo">
+            <img src="./load-logo.png" alt="logo">
+        </div>
+        <div id="thumbnail_game">
+                <img src="./load-bottom.png" alt="thumbnail_game">
+        </div>
+        -->
         <div id="progress">
             <div id="full"></div>
             <p>Loading</p>
@@ -174,20 +216,14 @@
                   updateSplashScreen();//
                   coverScreen.style.display = "block";
 
-                  document.getElementById("loader").style.opacity = "0";
                   setTimeout(() => {
                     document.getElementById("loader").style.display = "none";
                     clearInterval(load_id);
-                  }, 1800);
-
-                  /*
-                  setTimeout(() => {
-                    document.getElementById("loader").style.display = "none";
-                    clearInterval(load_id);
-                  }, 200);          
-                  */      
+                  }, 200);                
                                   
                   var unityCanvas = document.getElementById("unity-canvas");
+                  //coverScreen.style.width = unityCanvas.style.width;
+                  //coverScreen.style.height = unityCanvas.style.height;
 
                   // Hide cover screen
                   setTimeout(() => {

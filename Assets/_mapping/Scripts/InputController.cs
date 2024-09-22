@@ -9,7 +9,8 @@ public class InputController : MonoBehaviour
     [DllImport("__Internal")] private static extern void OpenWebsite();
     [DllImport("__Internal")] private static extern void ClickBtnCount(int index);
 
-    [SerializeField] private GameObject BgRef;
+    [SerializeField] private PopUpText _popUpText;
+    [SerializeField] private GameObject _bgRef;
     [SerializeField] private SpriteRenderer[] _roadSRs;
     [SerializeField] private SpriteRenderer[] _dotSRs;
     [SerializeField] private SpriteRenderer[] _txtStationSRs;
@@ -27,9 +28,7 @@ public class InputController : MonoBehaviour
     [SerializeField] private Transform _tapIconStart, _tapIconEnd;
     [SerializeField] private GameObject _panelMap;
     [SerializeField] private GameObject _txtStart;
-    [SerializeField] private GameObject _panelPopUp;
-    [SerializeField] private Transform _popUp;
-    [SerializeField] private Text _txtBtnBack;
+    
 
     [SerializeField] private Sprite _bgRefEN, _bgRefVN;
     [SerializeField] private Image _panelBg;
@@ -97,7 +96,6 @@ public class InputController : MonoBehaviour
         _tapIcon.SetActive(false);
         _tapIconDirection = (_tapIconEnd.position - _tapIconStart.position).normalized;
         _tapIcon.transform.position = _tapIconStart.position;
-        _panelPopUp.SetActive(false);
     }
 
     private void SetUpCurrentTxtStationSprite()
@@ -126,6 +124,7 @@ public class InputController : MonoBehaviour
     public void ClickLangueBtn()
     {
         _isVNLanguage = !_isVNLanguage;
+        _popUpText.SetUpPopUpText(!_isVNLanguage);
         if (_isVNLanguage)
         {
             _btnLanguage.sprite = _btnVN;
@@ -138,7 +137,6 @@ public class InputController : MonoBehaviour
             _clickStart.sprite = _clickStartVN;
             _title.sprite = _titleVN;
             _txtStartSR.sprite = _txtStartVN;
-            _txtBtnBack.text = "Quay lại";
         }
         else
         {
@@ -152,7 +150,6 @@ public class InputController : MonoBehaviour
             _clickStart.sprite = _clickStartEN;
             _title.sprite = _titleEN;
             _txtStartSR.sprite = _txtStartEN;
-            _txtBtnBack.text = "Back";
         }
         SetUpCurrentTxtStationSprite();
     }
@@ -160,7 +157,7 @@ public class InputController : MonoBehaviour
 
     public void ClickSeeDetails()//Click to Start
     {
-        BgRef.transform.DOScale(1.25f, 2f);
+        _bgRef.transform.DOScale(1.25f, 2f);
         _mainCamera.transform.DOMove(new Vector3(0.73f, -9, -10), 2f);
         _panelMap.SetActive(false);
         _txtStart.transform.localScale = Vector3.zero;
@@ -201,9 +198,7 @@ public class InputController : MonoBehaviour
         if (_currentID == indexStation || (_currentID >= indexStation && indexStation >= 7))
         {
             //Show Pop Up
-            _popUp.localScale = Vector3.zero;
-            _popUp.DOScale(1, 0.7f);
-            _panelPopUp.SetActive(true);
+            _popUpText.ShowPopUpText(indexStation);
 
             Debug.Log("click view more " + indexStation);
 
