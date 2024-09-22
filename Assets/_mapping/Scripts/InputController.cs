@@ -187,7 +187,7 @@ public class InputController : MonoBehaviour
 
     public void CliclReadMore()
     {
-        if (_currentID == _txtStationSRs.Length - 1)
+        if (_currentID >= 7)//_currentID == _txtStationSRs.Length - 1
         {
             if (Application.platform == RuntimePlatform.WebGLPlayer) 
             { 
@@ -203,7 +203,7 @@ public class InputController : MonoBehaviour
 
     public void ClickViewMore(int indexStation)
     {
-        if (_currentID == indexStation)
+        if (_currentID == indexStation || (_currentID >= indexStation && indexStation >= 7))
         {
             _currentTxtStations[indexStation] = _txtStationsLoad[indexStation];
             _currentTxtStationBlurs[indexStation] = _txtStationBlursLoad[indexStation];
@@ -277,6 +277,7 @@ public class InputController : MonoBehaviour
 
     void UpdateSprites(int newIndex)
     {
+        if (newIndex == 8) { return; }
         _playHandDrag = false;
         _handDrag.SetActive(false);
 
@@ -285,12 +286,23 @@ public class InputController : MonoBehaviour
             _txtStationSRs[i].sprite = _currentTxtStationBlurs[i];
         }
 
+        
         _txtStationSRs[newIndex].sprite = _currentTxtStations[newIndex];
-
+        
         if (_roadSRs[newIndex].color.a == 0)
         {
             _roadSRs[newIndex].DOFade(1, 0.6f);
             _dotSRs[newIndex].transform.DOScale(0.2f, 0.6f);
+        }
+
+        if (newIndex == 7)
+        {
+            _txtStationSRs[8].sprite = _currentTxtStations[8];
+            if (_roadSRs[8].color.a == 0)
+            {
+                _roadSRs[8].DOFade(1, 0.6f);
+                _dotSRs[8].transform.DOScale(0.2f, 0.6f);
+            }
         }
 
         //Debug.Log("Index ========== " + newIndex);
