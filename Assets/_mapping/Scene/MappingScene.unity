@@ -591,86 +591,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107242794}
   m_CullTransparentMesh: 1
---- !u!1 &176368426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 176368427}
-  - component: {fileID: 176368429}
-  - component: {fileID: 176368428}
-  m_Layer: 5
-  m_Name: Text Title
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &176368427
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176368426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 895543147}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.86, y: 450}
-  m_SizeDelta: {x: 702.2415, y: 215.8404}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &176368428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176368426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 67dc05c224e30aa4d800f0fe0db4b68b, type: 3}
-    m_FontSize: 70
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 70
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "H\xE0nh tr\xECnh b\u1EAFt \u0111\u1EA7u\r t\u1EEB m\u1ED9t c\xE2u h\u1ECFi"
---- !u!222 &176368429
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176368426}
-  m_CullTransparentMesh: 1
 --- !u!1 &189901925
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,116 +2056,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _panelPopUp: {fileID: 104165037}
   _popUp: {fileID: 895543147}
-  _txtBtnBack: {fileID: 1152313621}
-  _txtNumber: {fileID: 978804772}
-  _txtTitle: {fileID: 176368428}
-  _txtContent: {fileID: 1275154655}
-  _txtTitleENs:
-  - A Journey Starts with a Question
-  - The Essence of Happiness
-  - From Loss to Light
-  - A Smile Can Change the World
-  - Nurturing Happiness
-  - Moments of Connection
-  - Inspiring Happiness
-  - Make the World Smile for Peace
-  _txtTitleVNs:
-  - "H\xE0nh tr\xECnh b\u1EAFt \u0111\u1EA7u t\u1EEB m\u1ED9t c\xE2u h\u1ECFi"
-  - "B\u1EA3n ch\u1EA5t c\u1EE7a H\u1EA1nh ph\xFAc"
-  - "T\u1EEB m\u1EA5t m\xE1t \u0111\u1EBFn \xE1nh s\xE1ng"
-  - "Khi n\u1EE5 c\u01B0\u1EDDi c\xF3 th\u1EC3 thay \u0111\u1ED5i th\u1EBF gi\u1EDBi"
-  - "Nu\xF4i d\u01B0\u1EE1ng H\u1EA1nh ph\xFAc"
-  - "Kho\u1EA3nh kh\u1EAFc c\u1EE7a s\u1EF1 K\u1EBFt n\u1ED1i"
-  - "Truy\u1EC1n c\u1EA3m h\u1EE9ng H\u1EA1nh ph\xFAc"
-  - "L\xE0m cho th\u1EBF gi\u1EDBi m\u1EC9m c\u01B0\u1EDDi v\xEC H\u1EA1nh ph\xFAc"
-  _txtContentENs:
-  - "On Peace Day, we invite you to explore a simple yet profound question: \"What
-    is happiness?\" This question sets the stage for a shared journey\u2014a journey
-    that connects hearts, minds, and souls in the pursuit of understanding and peace."
-  - "Why happiness? Because it is the foundation of peace and compassion. Happiness
-    is more than a feeling\u2014it is a way of being. It\u2019s the cosmic ingredient
-    that makes everything better, enriching our lives and uniting us in our shared
-    humanity."
-  - "Our story started with the personal journey of our founder, Yosuke Masuko. In
-    a time of loss, he found solace and joy in hosting a simple pizza party. This
-    experience highlighted the deep interconnectedness of happiness and the importance
-    of compassion, planting the seeds for Pizza 4P\u2019s. "
-  - Peace begins with a smile. When each heart finds peace, the world follows. Happiness
-    grows when shared, creating ripples that extend from one person to another, transforming
-    communities and inspiring a movement of joy and connection.
-  - "Nourishing communities starts with respecting the Earth. As we nurture the Earth,
-    it nurtures us back. Happiness comes from this symbiotic relationship\u2014an
-    understanding that we are all interconnected and that caring for one nurtures
-    the other."
-  - 'We craft moments that matter through exceptional food, heartfelt service, and
-    inviting spaces. Sharing a meal creates meaningful connections and memories,
-    uniting us in the simple joy of being together. Inner peace leads to outer smiles. '
-  - "We believe in \"Edutainment\"\u2014combining education and entertainment to
-    make sustainability and compassion accessible to all ages. Through creative play
-    and community engagement, we inspire the next generation to cherish the Earth
-    and spread happiness. "
-  - "Happiness is a choice and a journey we can all start together. By fostering
-    community, compassion, and joy, we can make the world smile for peace. Let\u2019s
-    come together, one smile at a time, and create a happier world. "
-  _txtContentVNs:
-  - "Nh\xE2n Ng\xE0y Qu\u1ED1c t\u1EBF H\xF2a b\xECnh, ch\xFAng t\xF4i m\u1EDDi b\u1EA1n
-    kh\xE1m ph\xE1 m\u1ED9t c\xE2u h\u1ECFi \u0111\u01A1n gi\u1EA3n nh\u01B0ng s\xE2u
-    s\u1EAFc: \"H\u1EA1nh ph\xFAc l\xE0 g\xEC?\". C\xE2u h\u1ECFi n\xE0y m\u1EDF
-    \u0111\u1EA7u cho m\u1ED9t h\xE0nh tr\xECnh chung\u2014m\u1ED9t h\xE0nh tr\xECnh
-    k\u1EBFt n\u1ED1i tr\xE1i tim, t\xE2m tr\xED v\xE0 t\xE2m h\u1ED3n trong vi\u1EC7c
-    t\xECm ki\u1EBFm v\xE0 hi\u1EC3u th\xEAm v\u1EC1 s\u1EF1 b\xECnh y\xEAn."
-  - "T\u1EA1i sao l\u1EA1i l\xE0 h\u1EA1nh ph\xFAc? B\u1EDFi v\xEC \u0111\xF3 l\xE0
-    n\u1EC1n t\u1EA3ng c\u1EE7a s\u1EF1 y\xEAn b\xECnh v\xE0 l\xF2ng tr\u1EAFc \u1EA9n.
-    H\u1EA1nh ph\xFAc kh\xF4ng ch\u1EC9 l\xE0 m\u1ED9t c\u1EA3m x\xFAc\u2014m\xE0
-    c\xF2n l\xE0 m\u1ED9t c\xE1ch s\u1ED1ng. M\u1ED9t \"nguy\xEAn li\u1EC7u\" khi\u1EBFn
-    m\u1ECDi th\u1EE9 tr\u1EDF n\xEAn t\u1ED1t \u0111\u1EB9p h\u01A1n, l\xE0m cu\u1ED9c
-    s\u1ED1ng phong ph\xFA h\u01A1n v\xE0 g\u1EAFn k\u1EBFt con ng\u01B0\u1EDDi. "
-  - "C\xE2u chuy\u1EC7n c\u1EE7a ch\xFAng t\xF4i b\u1EAFt \u0111\u1EA7u t\u1EEB h\xE0nh
-    tr\xECnh c\xE1 nh\xE2n c\u1EE7a nh\xE0 s\xE1ng l\u1EADp, Yosuke Masuko. Trong
-    th\u1EDDi \u0111i\u1EC3m m\u1EA5t m\xE1t, anh \u0111\xE3 t\xECm th\u1EA5y s\u1EF1
-    an \u1EE7i v\xE0 ni\u1EC1m vui qua vi\u1EC7c t\u1ED5 ch\u1EE9c m\u1ED9t b\u1EEFa
-    ti\u1EC7c pizza \u0111\u01A1n gi\u1EA3n. Tr\u1EA3i nghi\u1EC7m n\xE0y l\xE0m
-    n\u1ED5i b\u1EADt m\u1ED1i li\xEAn h\u1EC7 s\xE2u s\u1EAFc gi\u1EEFa h\u1EA1nh
-    ph\xFAc v\xE0 t\u1EA7m quan tr\u1ECDng c\u1EE7a l\xF2ng tr\u1EAFc \u1EA9n, gieo
-    h\u1EA1t m\u1EA7m \u0111\u1EA7u ti\xEAn cho s\u1EF1 kh\u1EDFi \u0111\u1EA7u c\u1EE7a
-    Pizza 4P's."
-  - "S\u1EF1 y\xEAn b\xECnh b\u1EAFt \u0111\u1EA7u b\u1EB1ng m\u1ED9t n\u1EE5 c\u01B0\u1EDDi.
-    Khi m\u1ED7i c\xE1 nh\xE2n c\u1EA3m nh\u1EADn \u0111\u01B0\u1EE3c s\u1EF1 b\xECnh
-    y\xEAn, th\u1EBF gi\u1EDBi s\u1EBD ti\u1EBFp n\u1ED1i n\u0103ng l\u01B0\u1EE3ng
-    \u0111\xF3. H\u1EA1nh ph\xFAc l\u1EDBn d\u1EA7n khi \u0111\u01B0\u1EE3c chia
-    s\u1EBB, t\u1EA1o ra nh\u1EEFng g\u1EE3n s\xF3ng lan t\u1ECFa t\u1EEB ng\u01B0\u1EDDi
-    n\xE0y sang ng\u01B0\u1EDDi kh\xE1c, chuy\u1EC3n h\xF3a c\u1ED9ng \u0111\u1ED3ng
-    v\xE0 truy\u1EC1n c\u1EA3m h\u1EE9ng cho l\xE0n s\xF3ng c\u1EE7a ni\u1EC1m vui
-    v\xE0 tinh th\u1EA7n k\u1EBFt n\u1ED1i."
-  - "\u0110\u1EC3 nu\xF4i d\u01B0\u1EE1ng c\u1ED9ng \u0111\u1ED3ng, c\u1EA7n b\u1EAFt
-    \u0111\u1EA7u b\u1EB1ng tinh th\u1EA7n t\xF4n tr\u1ECDng Tr\xE1i \u0110\u1EA5t.
-    Khi ch\xFAng ta nu\xF4i d\u01B0\u1EE1ng Tr\xE1i \u0110\u1EA5t, ch\xFAng ta s\u1EBD
-    nh\u1EADn l\u1EA1i \u0111i\u1EC1u t\u01B0\u01A1ng t\u1EF1. H\u1EA1nh ph\xFAc
-    \u0111\u1EBFn t\u1EEB m\u1ED1i quan h\u1EC7 c\u1ED9ng sinh n\xE0y \u2014 nh\u1EADn
-    th\u1EE9c \u0111\u01B0\u1EE3c r\u1EB1ng t\u1EA5t c\u1EA3 ch\xFAng ta \u0111\u1EC1u
-    k\u1EBFt n\u1ED1i v\u1EDBi nhau v\xE0 vi\u1EC7c ch\u0103m s\xF3c cho m\u1ED9t
-    ng\u01B0\u1EDDi s\u1EBD nu\xF4i d\u01B0\u1EE1ng ng\u01B0\u1EDDi kh\xE1c. "
-  - "Ch\xFAng t\xF4i t\u1EA1o ra nh\u1EEFng kho\u1EA3nh kh\u1EAFc \u0111\xE1ng nh\u1EDB
-    th\xF4ng qua \u1EA9m th\u1EF1c, d\u1ECBch v\u1EE5 kh\xE1ch h\xE0ng v\xE0 kh\xF4ng
-    gian th\xE2n thi\u1EC7n. C\u1EA3m gi\xE1c \u0111\u01B0\u1EE3c k\u1EBFt n\u1ED1i,
-    nh\u1EEFng k\u1EC9 ni\u1EC7m \u0111\xE1ng nh\u1EDB v\xE0 s\u1EE3i d\xE2y li\xEAn
-    k\u1EBFt ch\xFAng ta qua nh\u1EEFng ni\u1EC1m vui gi\u1EA3n d\u1ECB c\xF3 th\u1EC3
-    c\xF3 \u0111\u01B0\u1EE3c th\xF4ng qua nh\u1EEFng b\u1EEFa \u0103n. B\xECnh y\xEAn
-    trong t\xE2m s\u1EBD d\u1EABn \u0111\u1EBFn y\xEAn b\xECnh trong cu\u1ED9c s\u1ED1ng
-    xung quanh. "
-  - "Ch\xFAng t\xF4i tin v\xE0o m\xF4 h\xECnh \"Edutainment\"\u2014k\u1EBFt h\u1EE3p
-    gi\xE1o d\u1EE5c v\xE0 gi\u1EA3i tr\xED \u0111\u1EC3 gi\xFAp cho tinh th\u1EA7n
-    b\u1EC1n v\u1EEFng v\xE0 l\xF2ng tr\u1EAFc \u1EA9n d\u1EC5 ti\u1EBFp c\u1EADn
-    h\u01A1n v\u1EDBi m\u1ECDi l\u1EE9a tu\u1ED5i. Th\xF4ng qua c\xE1c ho\u1EA1t
-    \u0111\u1ED9ng s\xE1ng t\u1EA1o v\xE0 g\u1EAFn k\u1EBFt c\u1ED9ng \u0111\u1ED3ng,
-    ch\xFAng t\xF4i mong mu\u1ED1n truy\u1EC1n c\u1EA3m h\u1EE9ng cho th\u1EBF h\u1EC7
-    ti\u1EBFp theo, tr\xE2n tr\u1ECDng Tr\xE1i \u0110\u1EA5t v\xE0 lan t\u1ECFa h\u1EA1nh
-    ph\xFAc. "
-  - "H\u1EA1nh ph\xFAc l\xE0 m\u1ED9t l\u1EF1a ch\u1ECDn v\xE0 m\u1ED9t h\xE0nh tr\xECnh
-    m\xE0 t\u1EA5t c\u1EA3 ch\xFAng ta \u0111\u1EC1u c\xF3 th\u1EC3 b\u1EAFt \u0111\u1EA7u.
-    B\u1EB1ng c\xE1ch nu\xF4i d\u01B0\u1EE1ng c\u1ED9ng \u0111\u1ED3ng, l\xF2ng tr\u1EAFc
-    \u1EA9n v\xE0 ni\u1EC1m vui, ch\xFAng ta c\xF3 th\u1EC3 l\xE0m cho th\u1EBF gi\u1EDBi
-    m\u1EC9m c\u01B0\u1EDDi v\xEC h\u1EA1nh ph\xFAc.  "
+  _popUpENs:
+  - {fileID: 21300000, guid: 918b2bf7e64fe2e4694debaecd07c536, type: 3}
+  - {fileID: 21300000, guid: c27112eea37da8948b55f85637148399, type: 3}
+  - {fileID: 21300000, guid: 130b19f893ef3ec4c8216a3ffcb5d94b, type: 3}
+  - {fileID: 21300000, guid: 41b2a4660c379b94bba5e0a9cc2dee22, type: 3}
+  - {fileID: 21300000, guid: f86dc5068df72bc49bfaf5aa1bd6b1d9, type: 3}
+  - {fileID: 21300000, guid: a24a49fb73340114082973b72062bed9, type: 3}
+  - {fileID: 21300000, guid: 748d7c96c9fb88d438183375b42908f6, type: 3}
+  - {fileID: 21300000, guid: c1b817efa8dbe894eb5f1d918c08bdaf, type: 3}
+  _popUpVNs:
+  - {fileID: 21300000, guid: ce887c3fe377bc541a4f6bf7ce18b339, type: 3}
+  - {fileID: 21300000, guid: 07d56e89e6c925f459d5ed3b97bd440e, type: 3}
+  - {fileID: 21300000, guid: 60bbbe689e9096b4c991762fb8de8b5c, type: 3}
+  - {fileID: 21300000, guid: 1ef2b076476e0b54887c0983f9871eb6, type: 3}
+  - {fileID: 21300000, guid: 5f661c18e4a95af4bac18453ad85b647, type: 3}
+  - {fileID: 21300000, guid: 7e2cfe5d259fe7b4787c935415591776, type: 3}
+  - {fileID: 21300000, guid: 3554b6db0f46f7f408d254d540e7c1d3, type: 3}
+  - {fileID: 21300000, guid: f63c2c92c036a3d4a91aebbc88f6ad19, type: 3}
+  _popUpImg: {fileID: 895543148}
 --- !u!1 &569324945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,16 +4045,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2096207960}
-  - {fileID: 978804771}
-  - {fileID: 176368427}
-  - {fileID: 1275154654}
   m_Father: {fileID: 104165038}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 850, y: 1450}
+  m_SizeDelta: {x: 926.6554, y: 1579.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &895543148
 MonoBehaviour:
@@ -4247,7 +4073,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e67045c1617548f40b1f9c0f53c07630, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 918b2bf7e64fe2e4694debaecd07c536, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4297,86 +4123,6 @@ Transform:
   m_Father: {fileID: 1771327924}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &978804770
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 978804771}
-  - component: {fileID: 978804773}
-  - component: {fileID: 978804772}
-  m_Layer: 5
-  m_Name: Text Number
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &978804771
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978804770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 895543147}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.86, y: 616}
-  m_SizeDelta: {x: 702.2415, y: 112.4737}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &978804772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978804770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 67dc05c224e30aa4d800f0fe0db4b68b, type: 3}
-    m_FontSize: 70
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 70
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 01
---- !u!222 &978804773
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978804770}
-  m_CullTransparentMesh: 1
 --- !u!1 &1030918452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5049,86 +4795,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1152313618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1152313619}
-  - component: {fileID: 1152313620}
-  - component: {fileID: 1152313621}
-  m_Layer: 5
-  m_Name: Text Btn Back
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1152313619
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152313618}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2096207960}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1152313620
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152313618}
-  m_CullTransparentMesh: 1
---- !u!114 &1152313621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1152313618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.29411766, b: 0.6039216, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 67dc05c224e30aa4d800f0fe0db4b68b, type: 3}
-    m_FontSize: 75
-    m_FontStyle: 1
-    m_BestFit: 1
-    m_MinSize: 5
-    m_MaxSize: 80
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Back
 --- !u!1 &1153349548
 GameObject:
   m_ObjectHideFlags: 0
@@ -5802,91 +5468,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1275154653
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1275154654}
-  - component: {fileID: 1275154656}
-  - component: {fileID: 1275154655}
-  m_Layer: 5
-  m_Name: Text Content
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1275154654
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275154653}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 895543147}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.86, y: -55.455}
-  m_SizeDelta: {x: 702.2415, y: 740.9099}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1275154655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275154653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 67dc05c224e30aa4d800f0fe0db4b68b, type: 3}
-    m_FontSize: 45
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 4
-    m_MaxSize: 70
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "Nh\xE2n Ng\xE0y Qu\u1ED1c t\u1EBF H\xF2a b\xECnh, ch\xFAng t\xF4i m\u1EDDi
-    b\u1EA1n kh\xE1m ph\xE1 m\u1ED9t c\xE2u h\u1ECFi \u0111\u01A1n gi\u1EA3n nh\u01B0ng
-    s\xE2u s\u1EAFc: \"H\u1EA1nh ph\xFAc l\xE0 g\xEC?\". C\xE2u h\u1ECFi n\xE0y m\u1EDF
-    \u0111\u1EA7u cho m\u1ED9t h\xE0nh tr\xECnh chung\u2014m\u1ED9t h\xE0nh tr\xECnh
-    k\u1EBFt n\u1ED1i tr\xE1i tim, t\xE2m tr\xED v\xE0 t\xE2m h\u1ED3n trong vi\u1EC7c
-    t\xECm ki\u1EBFm v\xE0 hi\u1EC3u th\xEAm v\u1EC1 s\u1EF1 b\xECnh y\xEAn."
---- !u!222 &1275154656
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1275154653}
-  m_CullTransparentMesh: 1
 --- !u!1 &1295317754
 GameObject:
   m_ObjectHideFlags: 0
@@ -8360,15 +7941,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1152313619}
+  m_Children: []
   m_Father: {fileID: 895543147}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -582}
-  m_SizeDelta: {x: 400, y: 160}
+  m_AnchoredPosition: {x: 0, y: -639}
+  m_SizeDelta: {x: 333.2839, y: 249.963}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2096207961
 MonoBehaviour:
